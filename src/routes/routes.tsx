@@ -11,6 +11,10 @@ const routes = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      {
+        path: "/product",
+        element: <Home />,
+      },
     ],
   },
 ]);

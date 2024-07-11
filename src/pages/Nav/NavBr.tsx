@@ -4,9 +4,9 @@ const NavBr = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="z-30 pt-3">
+    <nav className="z-30 absolute top-1 pt-3 w-full">
       <div className="">
-        <div className="mx-auto px-4 sm:px-6 lg:px-20">
+        <div className="mx-auto px-4 sm:px-6 lg:px-20 ">
           <div className="flex items-center justify-between h-16 flex-row-reverse">
             <div className="flex items-center">
               <div className="hidden md:flex">

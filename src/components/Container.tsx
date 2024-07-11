@@ -6,7 +6,7 @@ type MyComponentProps = {
   
 const Container = ({children}:MyComponentProps) => {
     return (
-        <div className="px-4 sm:px-6 lg:px-20 mx-auto flex justify-center items-center">
+        <div className="px-6  mx-auto">
             {children}
         </div>
     );
