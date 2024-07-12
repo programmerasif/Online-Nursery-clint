@@ -3,7 +3,7 @@ import banner from "../../assets/bannerTwo.png";
 const Banner = () => {
   return (
     <div>
-      <div className="w-full  md:min-h-[65vh] lg:min-h-[85vh] text-center mt-20 lg:mt-0 grid grid-cols-1 lg:grid-cols-2 gap-4 justify-center  relative top-0 ">
+      <div className="w-full bg-gray-50 min-h-[35vh] sm:min-h-[45vh] md:min-h-[55vh] lg:min-h-[65vh] xl:min-h-[75vh] 2xl:min-h-[85vh]  text-center mt-20 lg:mt-0 grid grid-cols-1 lg:grid-cols-2 gap-4 justify-center  relative top-0 ">
       <div className="w-full bg-gradient-to-tl from-[#eff8ec] to-[#b1dda19d] rounded-br-[120px] rounded-tl-[120px] lg:rounded-tl-[0px] flex justify-start items-center p-10 lg:p-0">
         <div className="md:ps-[40px] lg:ps-[80px] flex justify-normal  flex-col pt-3">
           <h5 className=" md:text-[38px] lg:text-[42px] xl:text-[52px] font-semibold text-start text-[#262626e5] leading-tight ">

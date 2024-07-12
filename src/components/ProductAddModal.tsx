@@ -11,8 +11,6 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-// import Spinner from "./ui/spinner";
-import { useState } from "react";
 import Swal from "sweetalert2";
 import { useAddProductMutation } from "@/redux/features/product/productApi";
 
@@ -25,8 +23,8 @@ interface FormData {
   rating: string;
   picture: FileList;
 }
-const Modal = () => {
-  const [loading, setLoading] = useState(false);
+const ProductAddModal = () => {
+ 
   const [addProduct] = useAddProductMutation();
 
   const { register, handleSubmit } = useForm<FormData>(); 
@@ -37,7 +35,6 @@ const Modal = () => {
     const file = data.picture[0];
     const formData = new FormData();
     formData.append("image", file);
-    setLoading(true);
 
     const response = await fetch(
       `https://api.imgbb.com/1/upload?key=${API_KEY}`,
@@ -49,8 +46,6 @@ const Modal = () => {
 
     const result = await response.json();
     if (result.success) {
-      setLoading(false);
-
       const product = {
         image: result.data.url,
         title: data.title,
@@ -174,4 +169,4 @@ const Modal = () => {
   );
 };
 
-export default Modal;
+export default ProductAddModal;
