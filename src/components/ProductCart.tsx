@@ -5,11 +5,12 @@ import {
   useGetProductsQuery,
 } from "@/redux/features/product/productApi";
 import Swal from "sweetalert2";
+import UpdatedProductModal from "./UpdatedProductModal";
 
 const ProductCart = () => {
   const [deleteProduct] = useDeleteProductMutation();
 
-  const { data, isLoading, error } = useGetProductsQuery(undefined, {
+  const { data, isLoading, error } = useGetProductsQuery({action:'all'}, {
     pollingInterval: 1000,
   });
 
@@ -17,7 +18,7 @@ const ProductCart = () => {
   if (error) return <div>Error:</div>;
 
   // Access the data array
-  const products = data?.data.slice(0, 4) || [];
+  const products = data?.data?.product?.slice(0, 4) || [];
 
   const handelDelete = (id: string) => {
     Swal.fire({
@@ -42,7 +43,10 @@ const ProductCart = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-5 p-5 md:p-8 xl:p-14 bg-gradient-to-bl from-[#97d384] to-[#e8ebe79d] rounded-b-3xl rounded-tl-3xl">
       {products.map((product: any) => (
-        <div className="w-full sm:w-[250px] md:w-[300px] xl:w-[350px] 2xl:w-[380px] drop-shadow-xl bg-[#eff8ec] rounded-xl">
+        <div
+          key={product?._id}
+          className="w-full sm:w-[250px] md:w-[300px] xl:w-[350px] 2xl:w-[380px] drop-shadow-xl bg-[#eff8ec] rounded-xl"
+        >
           <div className="flex flex-col justify-center items-center  border-[#6ABE4C] gap-5 rounded-md">
             <div>
               <img
@@ -55,9 +59,10 @@ const ProductCart = () => {
             <div className="font-semibold">${product?.price}</div>
             <div>{product?.category}</div>
             <div className="flex justify-center items-center gap-5 mb-8">
-              <button className="bg-[#6ABE4C] px-[15px] py-[6px] rounded-md text-white font-semibold">
+              {/* <button className="bg-[#6ABE4C] px-[15px] py-[6px] rounded-md text-white font-semibold">
                 Update
-              </button>
+              </button> */}
+              <UpdatedProductModal product={product} />
               <button
                 className="px-[15px] py-[6px] rounded-md border border-[#6ABE4C] font-semibold"
                 onClick={() => handelDelete(product?._id)}

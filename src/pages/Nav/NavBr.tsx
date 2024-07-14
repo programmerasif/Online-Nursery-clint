@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "../../assets/logo.png";
+import { NavLink } from "react-router-dom";
 const NavBr = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -11,12 +12,15 @@ const NavBr = () => {
             <div className="flex items-center">
               <div className="hidden md:flex">
                 <div className="flex items-baseline space-x-4">
-                  <a className="text-black hover:text-[#59a83d] px-3 py-2 rounded-md text-sm font-medium">
+                  <NavLink to='/'className="text-black hover:text-[#59a83d] px-3 py-2 rounded-md text-sm font-medium">
                     Home
-                  </a>
-                  <a className="text-black hover:text-[#59a83d] px-3 py-2 rounded-md text-sm font-medium">
-                    About
-                  </a>
+                  </NavLink>
+                  <NavLink
+                    to="/product"
+                    className="text-black hover:text-[#59a83d] px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Product
+                  </NavLink>
                   <a className="text-black hover:text-[#59a83d] px-3 py-2 rounded-md text-sm font-medium">
                     Services
                   </a>
@@ -29,9 +33,9 @@ const NavBr = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-end flex-1 md:flex-none">
+            <NavLink to="/" className="flex justify-end flex-1 md:flex-none">
               <img src={logo} alt="" />
-            </div>
+            </NavLink>
             <div className="-mr-2 flex md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -82,12 +86,12 @@ const NavBr = () => {
           } md:hidden absolute z-20 bg-[#d0ebc7] w-full mt-5 `}
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a
+            <NavLink to='/'
               className="text-black block px-3 py-2 hover:bg-sky-700 rounded-md text-base font-medium"
               onClick={() => setIsOpen(!isOpen)}
             >
               Home
-            </a>
+            </NavLink>
             <a
               className="text-black hover:text-[#59a83d] block px-3 py-2 rounded-md text-base font-medium"
               onClick={() => setIsOpen(!isOpen)}

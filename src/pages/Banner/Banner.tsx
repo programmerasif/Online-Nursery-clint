@@ -1,4 +1,3 @@
-import "./banner.css";
 import banner from "../../assets/bannerTwo.png";
 const Banner = () => {
   return (
@@ -8,7 +7,7 @@ const Banner = () => {
         <div className="md:ps-[40px] lg:ps-[80px] flex justify-normal  flex-col pt-3">
           <h5 className=" md:text-[38px] lg:text-[42px] xl:text-[52px] font-semibold text-start text-[#262626e5] leading-tight ">
             Transform Your Home with{" "}
-            <span className="text-[#59a83d]">Greenery </span> and Experience
+            <span className="text-[#59a83d]">Green</span> and Experience
             Enhanced Well-Being!
           </h5>
           <p className="text-start lg:text-[18px] mt-4 text-[#595959] text-[12px]">
