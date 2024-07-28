@@ -60,7 +60,7 @@ const ProductAddModal = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Your work has been saved",
+          title: "Added Product SucessFully",
           showConfirmButton: false,
           timer: 1500
         });
@@ -69,15 +69,36 @@ const ProductAddModal = () => {
     } else {
       console.error("Upload failed:", result);
     }
-    // console.log(uploadedImg);
-
-    //     // post data into backend
+   
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Add New Product</Button>
+        <Button className="bg-[#6ABE4C]  rounded-md text-white  font-semibold cursor-pointer hover:bg-[#45ad1f] ">
+          <div className="flex justify-center items-center gap-2">
+          <span>
+          Add Product
+        </span>
+          <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            </span>
+          </div>
+        
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px] w-full h-[450px]">
         <DialogHeader>

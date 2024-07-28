@@ -11,37 +11,56 @@ const productApi = baseApi.injectEndpoints({
     }),
     getProducts: builder.query({
       query: (query) => {
-        console.log(query?.search);
-
         if (query?.search) {
-          console.log("searching query");
-          return `products?searchTerm=${query?.search}&page=${query.page}&limit=4`;
+          return `products?searchTerm=${query?.search}&page=${query.page}&limit=${query.limit}`;
         } else if (query?.filter) {
-          console.log("sorting query");
-          `products?category=${query?.filter}&page=${query.page}&limit=4`
-        } 
-        else if(query?.back){
-          console.log("set back paice");
-          
-          `/products?page=${query.page}&limit=4`;
+          `products?category=${query?.filter}&page=${query.page}&limit=${query.limit}`;
+        } else if (query?.back) {
+          `/products?page=${query.page}&limit=${query.limit}`;
+        } else if (query.all) {
+          return "/products";
         }
-          
-          return `/products?page=${query.page}&limit=4`;
-        
-        
+        return `/products?page=${query.page}&limit=${query.limit}`;
       },
     }),
     updateProduct: builder.mutation({
-      query: ({ id, product }) => ({
-        url: `/products/update-product/${id}`,
-        method: "PATCH",
-        body: product,
-      }),
+      query: (product) => {
+        return {
+          url: `/products/update-product/${product?.id}`,
+          method: "PATCH",
+          body: product,
+        };
+      },
     }),
     deleteProduct: builder.mutation({
       query: (id) => ({
         url: `/products/${id}`,
         method: "DELETE",
+      }),
+    }),
+    addAddedToCart: builder.mutation({
+      query: (product) => ({
+        url: "/chack-out/added-to-cart",
+        method: "POST",
+        body: product,
+      }),
+    }),
+    getAllAddedCart: builder.query({
+      query: () => {
+        return "/chack-out";
+      },
+    }),
+    deleteCart:builder.mutation({
+      query: (id) => ({
+        url: `/chack-out/delete-cart/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    updatecartQuentity:builder.mutation({
+      query: (product) => ({
+        url: `/chack-out/update-cart-quentity`,
+        method: "PATCH",
+        body: product,
       }),
     }),
   }),
@@ -52,4 +71,8 @@ export const {
   useAddProductMutation,
   useDeleteProductMutation,
   useUpdateProductMutation,
+  useAddAddedToCartMutation,
+  useGetAllAddedCartQuery,
+  useDeleteCartMutation,
+  useUpdatecartQuentityMutation
 } = productApi;

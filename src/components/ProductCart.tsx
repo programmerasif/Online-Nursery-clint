@@ -6,6 +6,7 @@ import {
 } from "@/redux/features/product/productApi";
 import Swal from "sweetalert2";
 import UpdatedProductModal from "./UpdatedProductModal";
+import ProductIsLoading from "./LoadingComponent/ProductIsLoading";
 
 const ProductCart = () => {
   const [deleteProduct] = useDeleteProductMutation();
@@ -14,7 +15,7 @@ const ProductCart = () => {
     pollingInterval: 1000,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ProductIsLoading />;
   if (error) return <div>Error:</div>;
 
   // Access the data array
@@ -59,9 +60,7 @@ const ProductCart = () => {
             <div className="font-semibold">${product?.price}</div>
             <div>{product?.category}</div>
             <div className="flex justify-center items-center gap-5 mb-8">
-              {/* <button className="bg-[#6ABE4C] px-[15px] py-[6px] rounded-md text-white font-semibold">
-                Update
-              </button> */}
+              
               <UpdatedProductModal product={product} />
               <button
                 className="px-[15px] py-[6px] rounded-md border border-[#6ABE4C] font-semibold"

@@ -13,7 +13,7 @@ const Banner = () => {
           <p className="text-start lg:text-[18px] mt-4 text-[#595959] text-[12px]">
             Discover our range of beautiful, easy-to-care-for plants that purify
             the air and enhance your home’s aesthetic. Create a serene, green
-            sanctuary withUrban Oasis Nursery.
+            sanctuary with Urban Oasis Nursery.
           </p>
           <button className="bg-[#6ABE4C] px-[20px] py-[10px] rounded-md max-w-32 mt-4 text-white font-semibold">
             Get Start
