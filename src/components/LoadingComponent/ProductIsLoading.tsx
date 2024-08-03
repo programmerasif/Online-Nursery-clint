@@ -5,7 +5,7 @@ const ProductIsLoading = () => {
       {cart.map((item) => (
         <div key={item} className="bg-[#eff8ec] min-h-[450px] 2xl:w-[400px] md:w-[340px]   lg:w-[320px] xl:w-[310px]">
           <div className="animate-pulse flex flex-col jb">
-            <div className="w-full min-h-[260px] bg-slate-600"></div>
+            <div className="w-full min-h-[260px] bg-slate-400"></div>
             <div className="flex justify-between items-center mt-32 px-5">
               <div className="px-4 py-2 rounded-xl text-xs  dark:text-white border-2 border-gray-400 font-semibold">
                 Detils →

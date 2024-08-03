@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { IComponentProps } from "./Types/types";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
-const SelectUi = ({handleSelectChange}:any) => {
+
+const SelectUi = ({handleSelectChange}: IComponentProps) => {
   
 
   

@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Swal from "sweetalert2";
-
-export const handelDeleteFun = ({id,deleteProduct}) =>{
+export const handelDeleteFun = ({id,deleteProduct}:any) =>{
   
     Swal.fire({
         title: "Are you sure?",
@@ -15,9 +15,11 @@ export const handelDeleteFun = ({id,deleteProduct}) =>{
         if (result.isConfirmed) {
           deleteProduct(id);
           Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
+            position: "center",
             icon: "success",
+            title: "Your file has been deleted.",
+            showConfirmButton: false,
+            timer: 1500
           });
         }
       });

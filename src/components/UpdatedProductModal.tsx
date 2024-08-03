@@ -1,9 +1,11 @@
+
+
+// export default UpdatedProductModal;
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useForm } from "react-hook-form";
+import { useForm,SubmitHandler } from "react-hook-form";
 import { Button } from "./ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -14,27 +16,65 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useUpdateProductMutation } from "@/redux/features/product/productApi";
 import CoustomButton from "./CoustomButton";
+import { useState } from "react";
+import LoadingComponent from "./LodingComponent/LoadingComponent";
 
-const UpdatedProductModal = ({ product }: any) => {
-  const { register, handleSubmit } = useForm();
+
+
+// Define an interface for the form data
+interface FormData {
+  category: string;
+  title: string;
+  price: number;
+  quantity: number;
+  description: string;
+}
+
+interface UpdatedProductModalProps {
+  product: {
+    _id: string;
+    category: string;
+    title: string;
+    price: number;
+    quantity: number;
+    description: string;
+  };
+}
+
+
+const UpdatedProductModal = ({ product }: UpdatedProductModalProps) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
   const [updateProduct] = useUpdateProductMutation();
+  const [isLoading,setLoading] = useState(false)
 
   const id = product?._id;
-  const onSubmit = async (data: any) => {
-    const updateData = {
-      category: data?.category,
-      title: data?.title,
-      price: data?.price,
-      id,
-      quantity:data?.quantity,
-      description: data?.description
-    };
-    const res = await updateProduct(updateData);
-    console.log(res);
+  const onSubmit: SubmitHandler<FormData> = async (data:FormData) => {
+    if (Object.keys(errors).length === 0) {
+      setLoading(true)
+      const updateData = {
+        category: data?.category,
+        title: data?.title,
+        price: data?.price,
+        id,
+        quantity: data?.quantity,
+        description: data?.description
+      };
+      const res = await updateProduct(updateData);
+     
+      if (res?.data?.success) {
+        setLoading(false)
+      }
+      if (res?.data) {
+        setIsOpen(false);
+        setLoading(false)
+      }
+    }
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="bg-gray-50 hover:bg-gray-50 ">
           <CoustomButton
@@ -63,76 +103,90 @@ const UpdatedProductModal = ({ product }: any) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px] w-full h-[450px]">
         <DialogHeader>
-          <DialogTitle>Update Product</DialogTitle>
+          <DialogTitle className="text-[#6ABE4C]">Update Product</DialogTitle>
           <DialogDescription>
             You have to give all the information here
           </DialogDescription>
         </DialogHeader>
+        {
+            isLoading && <LoadingComponent />
+          }
         <div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="grid grid-cols-2 gap-4 py-4 w-full"
           >
             <div className="grid grid-cols-1 gap-2">
-              <Label htmlFor="Category" className="text-left">
+              <Label htmlFor="Category" className="text-left font-bold text-gray-500">
                 Category
               </Label>
               <Input
                 id="Category"
                 defaultValue={`${product?.category}`}
+                className={`shadow appearance-none border rounded w-full py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline${
+                  errors.category ? "border-2 border-red-500" : ""
+                } focus:border-customFocusColor focus:ring-customFocusColor`}
                 {...register("category", { required: "Category is required" })}
               />
             </div>
             <div className="grid grid-cols-1 gap-2">
-              <Label htmlFor="title" className="text-left">
+              <Label htmlFor="title" className="text-left font-bold text-gray-500">
                 Title
               </Label>
               <Input
                 id="title"
                 defaultValue={`${product?.title}`}
+                className={`shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline${
+                  errors.title ? "border-2 border-red-500" : ""
+                } focus:border-customFocusColor focus:ring-customFocusColor`}
                 {...register("title", { required: "Title is required" })}
               />
             </div>
             <div className="grid grid-cols-1 gap-2">
-              <Label htmlFor="price" className="text-left">
+              <Label htmlFor="price" className="text-left font-bold text-gray-500">
                 Price
               </Label>
               <Input
                 id="price"
                 defaultValue={`${product?.price}`}
+                className={`shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline${
+                  errors.price ? "border-2 border-red-500" : ""
+                } focus:border-customFocusColor focus:ring-customFocusColor`}
                 {...register("price", { required: "Price is required" })}
               />
             </div>
             <div className="grid grid-cols-1 gap-2">
-              <Label htmlFor="quantity" className="text-left">
+              <Label htmlFor="quantity" className="text-left font-bold text-gray-500">
                 Quantity
               </Label>
               <Input
                 id="quantity"
                 defaultValue="Add quantity"
+                className={`shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline${
+                  errors.quantity ? "border-2 border-red-500" : ""
+                } focus:border-customFocusColor focus:ring-customFocusColor`}
                 {...register("quantity", { required: "Quantity is required" })}
               />
             </div>
             <div className="grid grid-cols-1 gap-2">
-              <Label htmlFor="description" className="text-left">
+              <Label htmlFor="description" className="text-left font-bold text-gray-500">
                 Description
               </Label>
               <Input
                 id="description"
                 defaultValue="Add Description"
+                className={`shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline${
+                  errors.description ? "border-2 border-red-500" : ""
+                } focus:border-customFocusColor focus:ring-customFocusColor`}
                 {...register("description", {
                   required: "Description is required",
                 })}
               />
             </div>
-            
-            
             <div className="grid grid-cols-1 mt-5">
-              <DialogClose asChild>
-                <Button type="submit" className="ro">
-                  Update Product
-                </Button>
-              </DialogClose>
+              <Button type="submit" className="bg-[#6ABE4C] hover:bg-[#52c229]">
+                Update Product
+              </Button>
             </div>
           </form>
         </div>

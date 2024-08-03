@@ -30,8 +30,10 @@ const Products = () => {
     page,
     back,
     limit: 4,
+  },
+  {
+    pollingInterval: 1000,
   });
-  console.log(data);
 
   const handlePaginate = (count: number) => {
     const result = setPage((prevPage) => prevPage + count);

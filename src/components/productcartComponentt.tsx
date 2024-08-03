@@ -1,31 +1,38 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { NavLink } from "react-router-dom";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
 import { useAddAddedToCartMutation } from "@/redux/features/product/productApi";
 import AddToCart from "@/utils/AddToCart";
+import Swal from "sweetalert2";
+import { IProduct, IProductProps } from "./Types/types";
 
-const ProductcartComponentt = ({ product }: any) => {
-  const [addAddedToCart] = useAddAddedToCartMutation()
+const ProductcartComponentt = ({ product }: IProductProps) => {
+  const [addAddedToCart] = useAddAddedToCartMutation();
 
-  const handelAddToCart = async(product:any) =>{
+  const handelAddToCart = async (product: IProduct) => {
+    const availableQuentity = Number(product?.quantity);
+    if (availableQuentity == 0) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Quentity not Available",
+        confirmButtonColor: "#7bc262",
+      });
+    }
+
     const item = {
       productID: product._id,
       image: product?.image,
       title: product?.title,
       price: product?.price,
       category: product?.category,
-      description:product?.description,
+      description: product?.description,
       quantity: 1,
-      availableQuantity : product?.quantity,
+      availableQuantity: product?.quantity,
       rating: product?.rating,
     };
-   
-    AddToCart(addAddedToCart,item)
-  
-   
-  }
+
+    AddToCart(addAddedToCart, item, availableQuentity);
+  };
 
   return (
     <CardContainer className="inter-var">
@@ -54,14 +61,17 @@ const ProductcartComponentt = ({ product }: any) => {
         </CardItem>
         <div className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300">
           <div className="flex justify-between">
-          <div><span className="font-semibold">Category</span> : <span>{product.category}</span></div>
-          <div className="">
-          <div className="flex justify-center items-center gap-1">
-          <span>{product.quantity}</span> <span className="text-[#6ABE4C]">/in stock</span>
+            <div>
+              <span className="font-semibold">Category</span> :{" "}
+              <span>{product.category}</span>
+            </div>
+            <div className="">
+              <div className="flex justify-center items-center gap-1">
+                <span>{product.quantity}</span>{" "}
+                <span className="text-[#6ABE4C]">/in stock</span>
+              </div>
+            </div>
           </div>
-          </div>
-          </div>
-          
         </div>
         <div className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300">
           <div className="flex justify-between items-center">
@@ -108,7 +118,7 @@ const ProductcartComponentt = ({ product }: any) => {
             translateZ={20}
             as="button"
             className="px-4 py-2 rounded-xl bg-[#6ABE4C] dark:bg-white dark:text-black text-white text-xs font-bold"
-            onClick={() =>handelAddToCart(product)}
+            onClick={() => handelAddToCart(product)}
           >
             Add To Cart
           </CardItem>

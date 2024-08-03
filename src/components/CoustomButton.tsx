@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactNode } from "react";
 import { Modal, ModalTrigger } from "./ui/animated-modal";
 
-const CoustomButton = ({ icon,text, styleClass}:any) => {
+
+interface IProps {
+ text:string,
+ styleClass:string
+ icon:ReactNode
+}
+const CoustomButton = ({ icon,text, styleClass}:IProps) => {
   return (
     <Modal>
       <ModalTrigger className={styleClass}>

@@ -2,7 +2,9 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-
+import { PinContainer } from "./3d-pin";
+import { AnimatedPinDemo } from "@/pages/Test";
+import img from "../../assets/man.jpg";
 export const InfiniteMovingCards = ({
   items,
   direction = "left",
@@ -11,9 +13,8 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
-    quote: string;
+    comment: string;
     name: string;
-    title: string;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -69,54 +70,60 @@ export const InfiniteMovingCards = ({
       }
     }
   };
+  const star = [1, 2, 3, 4, 5];
   return (
     <div
       ref={containerRef}
-      className={cn(
-        "scroller relative z-20  max-w-7xl overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
-        className
-      )}
+      className={cn("scroller relative z-20 overflow-hidden", className)}
     >
       <ul
         ref={scrollerRef}
         className={cn(
-          " flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
+          " flex min-w-full shrink-0 gap-4 w-max flex-nowrap",
           start && "animate-scroll ",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
         {items.map((item, idx) => (
-          <li
-            className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
-            style={{
-              background:
-                "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
-            }}
-            key={item.name}
-          >
-            <blockquote>
-              <div
-                aria-hidden="true"
-                className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
-              ></div>
-              <span className=" relative z-20 text-sm leading-[1.6] text-gray-100 font-normal">
-                {item.quote}
-              </span>
-              <div className="relative z-20 mt-6 flex flex-row items-center">
-                <span className="flex flex-col gap-1">
-                  <span className=" text-sm leading-[1.6] text-gray-400 font-normal">
-                    {item.name}
-                  </span>
-                  <span className=" text-sm leading-[1.6] text-gray-400 font-normal">
-                    {item.title}
-                  </span>
-                </span>
-              </div>
-            </blockquote>
-          </li>
+          <div className="flex gap-5">
+            <PinContainer
+              title={<AnimatedPinDemo />}
+              href="https://twitter.com/mannupaaji"
+              containerClassName="w-full max relative rounded-2xl  flex-shrink-0  px-8"
+              key={idx}
+            >
+              <blockquote className="w-[415px] bg-gradient-to-bl from-[#cee6c6] to-[#e8ebe79d] min-h-[170px] max-h-[170px] px-2 py-1 rounded-md">
+                <div className="flex justify-start items-end gap-2 pb-4 pt-2 pe-2">
+                  <img src={img} alt="" className="w-16 rounded-full ring-offset-2 ring-2 ring-[#6ABE4C] " />
+                  <div className="flex flex-col justify-self-start">
+                    <div className="flex justify-start items-center gap-1">
+                      {star.map((item) => (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="size-3 text-orange-500"
+                          key={item}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                          />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="font-semibold">{item?.name}</span>
+                  </div>
+                </div>
+                <div className="text-gray-700 text-xs">{`" ${item?.comment} "`}</div>
+              </blockquote>
+            </PinContainer>
+          </div>
         ))}
       </ul>
     </div>
   );
 };
-            

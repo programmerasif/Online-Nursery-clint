@@ -63,6 +63,20 @@ const productApi = baseApi.injectEndpoints({
         body: product,
       }),
     }),
+
+    paymentInfo: builder.mutation({
+      query: (product) => ({
+        url: "/payment-info/payment",
+        method: "POST",
+        body: product,
+      }),
+    }),
+    deleteChackoutCollection:builder.mutation({
+      query:() => ({
+        url: `chack-out/delete-chackout-collection`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -74,5 +88,7 @@ export const {
   useAddAddedToCartMutation,
   useGetAllAddedCartQuery,
   useDeleteCartMutation,
-  useUpdatecartQuentityMutation
+  useUpdatecartQuentityMutation,
+  usePaymentInfoMutation,
+  useDeleteChackoutCollectionMutation
 } = productApi;

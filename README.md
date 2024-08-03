@@ -1,30 +1,76 @@
-# React + TypeScript + Vite
+Welcome to the Online Nursery Website project! This README file will guide you through the setup, usage, and features of this application.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Project Overview
+The Online Nursery Website is a full-stack application designed to allow users to browse, filter, and search for nursery products, add them to a cart, and make online payments. The project includes both public-facing features for customers and administrative features for managing products and categories.
 
-Currently, two official plugins are available:
+🌐 Live URL
+[Online Nursery Website](https://urban-ocean-nursery.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📋 Table of Contents
 
-## Expanding the ESLint configuration
+🌟 Features
+Public Routes
+Product Browsing: Users can browse through products with advanced filtering, pagination, sorting, and searching options.
+Product Details: Detailed view of each product.
+Shopping Cart: Add products to the cart, manage quantities, and proceed to checkout.
+Checkout and Payment: Secure online payments with Stripe.js and Cash on Delivery (COD) options.
+Product and Category Management:
+Product List Table: Display products with options to update or delete.
+Add Product: Form to add new products.
+Real-time Updates: Optimistic UI updates for all CRUD operations.
+🛠️ Technology Stack
+Frontend: React, Redux, TypeScript, RTK Query, React Hook Form, React Router DOM, Tailwind CSS, shadcn UI, Aceternity UI, Hero Icons etc.
+Backend: Node.js, Express.js
+Database: MongoDB
+Payments: Stripe.js
+Hosting: Vercel
+🛠️ Setup Instructions
+Prerequisites
+Node.js 
+npm 
+MongoDB
+Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+🏃 Usage
+</br>
+Add Product
+Endpoint: POST /products/creat-product
+Description: Create a new product.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+</br>
+Update Product
+Endpoint: PATCH /products/update-product/:id
+Description: Update an existing product by ID.
+
+</br>
+Delete Product
+Endpoint: DELETE /products/:id
+Description: Delete a product by ID.
+
+</br>
+Cart API
+Add to Cart
+Endpoint: POST /chack-out/added-to-cart
+Description: Add a product to the cart.
+
+</br>
+Get All Cart Items
+Endpoint: GET /chack-out
+Description: Retrieve all items in the cart.
+</br>
+Delete Cart Item
+Endpoint: DELETE /chack-out/delete-cart/:id
+Description: Remove an item from the cart by ID.
+</br>
+Update Cart Quantity
+Endpoint: PATCH /chack-out/update-cart-quentity
+Description: Update the quantity of a cart item.
+
+</br>
+Payment API
+Payment Information
+
+Endpoint: POST /payment-info/payment
+Description: Process a payment.

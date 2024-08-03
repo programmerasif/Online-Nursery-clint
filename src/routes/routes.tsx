@@ -5,6 +5,7 @@ import Products from "@/pages/Products/Products";
 import ProductDetilsPage from "@/pages/ProductDetilsPage/ProductDetilsPage";
 import Checkout from "@/pages/Checkout/Checkout";
 import UserInfo from "@/pages/UserInfo/UserInfo";
+import Contact from "@/pages/Contact/Contact";
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
       {
         path: "/user-info",
         element: <UserInfo />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

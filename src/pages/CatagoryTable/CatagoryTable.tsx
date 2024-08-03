@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CoustomButton from "@/components/CoustomButton";
 import ProductAddModal from "@/components/ProductAddModal";
+import { IProduct } from "@/components/Types/types";
 import {
   Pagination,
   PaginationContent,
@@ -86,7 +88,7 @@ const CatagoryTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.data?.product.map((item) => (
+            {data?.data?.product.map((item: IProduct) => (
               <TableRow key={item?._id}>
                 <TableCell className="font-bold text-balance text-[#262626e5] w-[22%]">
                   {item?.title}
